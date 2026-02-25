@@ -108,3 +108,20 @@ which can lead to wrong decision making. */
 		END ) OVER() AvgCustomerClear
  --AVG(C.Score)  OVER() AvgScore it show wrong value.
  FROM Sales.Customers AS C
+
+ --conditional aggregation
+ -- Apply aggregate functions only on subsets of data that fullfill certain conditions.
+ 
+ --					task - 04
+ /*Count how many times each customer has made an order with sales 
+    greater then 30   */
+
+	SELECT 
+		O.CustomerID,
+		SUM(CASE 
+			WHEN Sales>30 THEN 1
+			ELSE 0
+		END ) TotalOrdersHighSales,
+		COUNT(*) TotalSales
+	FROM Sales.Orders AS O 
+	GROUP BY O.CustomerID
