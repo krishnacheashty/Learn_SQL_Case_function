@@ -88,3 +88,23 @@ Replace NULLS with a specific value.
 
 nulls can lead to inaccurate results,
 which can lead to wrong decision making. */
+ 
+
+ --				TASK - 04
+ -- find the Average scores of customers and treat nulls as 0
+ -- Additionally provide details such customer ID and LastName
+
+ SELECT 
+ C.CustomerID,
+ C.FirstName,
+ --C.LastName,
+ --C.Score,
+ C.Country,
+ COALESCE(C.LastName,'') LastName,
+ --COALESCE(C.Score,0) Score,
+	 AVG(CASE
+			WHEN Score IS NULL THEN 0
+			ELSE Score
+		END ) OVER() AvgCustomerClear
+ --AVG(C.Score)  OVER() AvgScore it show wrong value.
+ FROM Sales.Customers AS C
