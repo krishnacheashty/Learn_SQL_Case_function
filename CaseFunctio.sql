@@ -43,5 +43,48 @@ GROUP BY catagory
 ORDER BY TotalSales DESC;
 
 --NOTE : The data type of the results must be matching.
---mapping : transfrom the values from one from to another.
---save the file
+--Mapping : transfrom the values from one from to another.
+
+
+/*						TASK - 02
+RETRIVE EMPLOYEE DETAILS WITH GENDER DISPLAYED AS FULL TEXT.
+*/
+
+SELECT 
+*,
+--COALESCE(LASTNAME,'') LastName,
+--COALESCE(ManagerID,-999) ManagerId,  those are experement for Handling NULL value.
+
+CASE E.Gender
+
+	WHEN 'M' THEN 'Male'
+	WHEN 'F' THEN 'Female'
+	ELSE 'Not Avaiable'
+END GenderFullText
+
+FROM Sales.Employees AS E
+ORDER BY Gender
+
+/*					TASK - 03
+
+Retrive customers details with abbreviated country code.
+*/
+
+SELECT 
+C.CustomerID,
+C.Country,
+CASE C.Country
+	WHEN 'Germany' THEN 'DE'
+	WHEN 'USA' THEN 'US'
+	ELSE 'N/A'
+
+END CountryCode
+FROM Sales.Customers AS C
+
+
+/*				HANDLING NULLS
+
+Replace NULLS with a specific value.
+
+nulls can lead to inaccurate results,
+which can lead to wrong decision making. */
